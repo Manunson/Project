@@ -1,0 +1,31 @@
+.btn{
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    background-color: var(--clr-400);
+    color: var(--clr-dark);
+    padding: 0.5em 1em;
+    border-right: 3px solid var(--clr-600);
+    border-bottom: 3px solid var(--clr-600);
+
+    transition: transform 0.4s;
+}
+
+.btn:hover{
+    transform: translateY(-4px);
+}
+
+
+.container{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+}
+
+.section{
+    margin-top: 5rem;
+}
