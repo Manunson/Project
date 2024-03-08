@@ -14,6 +14,8 @@
 
 .btn:hover{
     transform: translateY(-4px);
+    background-color: var(--clr-400);
+    color: var(--clr-dark);
 }
 
 
@@ -23,6 +25,9 @@
     margin-right: auto;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
