@@ -29,32 +29,99 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 });
 
+//Initiative tracker
+document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.getElementById('addButton');
+    const characterList = document.getElementById('characterList');
+    const nextButton = document.getElementById('nextButton');
 
-const addButton = document.getElementById('addButton');
-const characterList = document.getElementById('characterList');
+    addButton.addEventListener('click', function() {
+      const characterName = document.getElementById('characterName').value;
+      const initiative = document.getElementById('initiative').value;
+     
+      if (characterName && initiative) {
+        const character = document.createElement('div');
+        character.classList.add('character');
+        character.innerHTML = `
+          <span class="character-info">${characterName}</span>
+          <span class="init-line"></span>
+          <span class="initiative">${initiative}</span>
+          <button class="removeButton">Remove</button>
+        `;
+        if(characterList.children.length === 0){
+            character.classList.add('active-init');
+        }
+        characterList.appendChild(character);
+  
+        document.getElementById('characterName').value = '';
+        document.getElementById('initiative').value = '';
+        
+       
 
-addButton.addEventListener('click', function() {
-  const characterName = document.getElementById('characterName').value;
-  const initiative = document.getElementById('initiative').value;
+        const removeButtons = document.querySelectorAll('.removeButton');
+        removeButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            if(button.parentNode.classList.contains('active-init') && Array.from(characterList.children).length > 1){
+                if(button.parentNode.nextElementSibling === null){
+                
+                    button.parentNode.classList.remove('active-init');
+                    button.parentNode.previousElementSibling.classList.add('active-init');
+                }
+                else{
+                    button.parentNode.classList.remove('active-init');
+                    button.parentNode.nextElementSibling.classList.add('active-init');
+                    
+                }
+            }
+        
+            button.parentNode.remove();
+            
+          });
+        }); 
+        
+      }
 
-  if (characterName && initiative) {
-    const character = document.createElement('div');
-    character.classList.add('character');
-    character.innerHTML = `
-      <span>${characterName}</span>
-      <span>${initiative}</span>
-      <button class="removeButton">Remove</button>
-    `;
-    characterList.appendChild(character);
-
-    document.getElementById('characterName').value = '';
-    document.getElementById('initiative').value = '';
-
-    const removeButtons = document.querySelectorAll('.removeButton');
-    removeButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        button.parentNode.remove();
-      });
+      sortCharactersByInitiative();
     });
-  }
-});
+    
+
+    nextButton.addEventListener('click', function() {
+        const characters = Array.from(characterList.children);
+
+        for(let i = 0; i < characters.length; i++){
+            
+            if(characters[i].classList.contains('active-init')){
+                if(i < characters.length - 1){
+                    characters[i].classList.remove('active-init');
+                    characters[i + 1].classList.add('active-init');
+                    return;
+                }
+                else{
+                    characters[i].classList.remove('active-init');
+                    characters[0].classList.add('active-init');
+                    return;
+                }
+            }
+            
+        }
+        
+
+    });
+    function sortCharactersByInitiative() {
+      const characters = Array.from(characterList.children);
+      characters.sort((a, b) => {
+        const aInitiative = parseInt(a.querySelector('.initiative').textContent);
+        const bInitiative = parseInt(b.querySelector('.initiative').textContent);
+        return bInitiative - aInitiative;
+      });
+    
+      characters.forEach(character => characterList.appendChild(character));
+      for(let i = 0; i < characters.length; i++){
+        if(characters[i].classList.contains('active-init')){
+            characters[i].classList.remove('active-init');
+        }
+      }
+      characters[0].classList.add('active-init');
+    }
+  });
+ 

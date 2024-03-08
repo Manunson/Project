@@ -181,21 +181,44 @@ header{
         margin-top: 20px;
       }
       
-      .character {
+      .character{
         margin-bottom: 10px;
         padding: 10px;
-        background-color: #f0f0f0;
+        background-color: var(--clr-light);
         border-radius: 5px;
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
+      .character-info {
+        color: var(--clr-med-accent);
+        font-weight: 600;
+      }
       
       .character button {
-        background-color: #dc3545;
+        background-color: var(--clr-400);
         color: #fff;
         border: none;
         padding: 5px 10px;
         border-radius: 3px;
         cursor: pointer;
       }
+
+      .initiative{
+        color: var(--clr-med-accent);
+        font-weight: 600;
+      }
+     
+      .nextButton{
+        margin:10px;
+      }
+      .active-init{
+        background-color: var(--clr-light-accent);
+        color: var(--clr-light-accent);
+      }
+
+      .init-line{
+        border: 1px solid var( --clr-med-accent);
+        
+        padding-top: 1.3rem;
+    }
