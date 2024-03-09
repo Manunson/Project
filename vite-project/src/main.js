@@ -29,6 +29,44 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+        
+    const slider = document.getElementById("myRange");
+    const drawButton = document.getElementById("drawButton");
+
+    //testing
+    const cardContainer = document.getElementById("cardContainer");
+    drawButton.innerHTML =  "Pick " + slider.value + " Cards"; 
+
+    //currently this really doesn't do anything because you still only get 1 card no matter what, will change this
+    //when I make a database and will randomly pick x amount of cards from that database and make them into divs...
+    slider.oninput = function() {
+      drawButton.innerHTML = "Pick " + this.value + " Cards";
+    }
+
+    drawButton.addEventListener('click',function(){
+      
+      //loops the entire amount of cards they want to draw
+      //added a -1 to the slider value because I have void hard coded in.
+      //PLEASE REMINDER MARA PLEASE REMOVE THAT -1 once you connect database
+      for(let i =0; i < slider.value-1; i++){
+
+        const card = document.createElement('div');
+        card.classList.add("card");
+        card.innerHTML = `
+          <h2 class="card-title">A</h2>
+          <div class ="line"></div> 
+          <p class="card-description">Put your stuff here</p>
+      `;
+      cardContainer.append(card);
+      }
+
+    });
+});
+
+
+
+
 //Initiative tracker
 document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.getElementById('addButton');
@@ -43,51 +81,46 @@ document.addEventListener('DOMContentLoaded', function() {
         const character = document.createElement('div');
         character.classList.add('character');
         character.innerHTML = `
-          <span class="character-info">${characterName}</span>
-          <span class="init-line"></span>
-          <span class="initiative">${initiative}</span>
+          <div class="character-info">${characterName}</div>
+          <div class="init-line"></div>
+          <div class="initiative">${initiative}</div>
           <button class="removeButton">Remove</button>
         `;
         if(characterList.children.length === 0){
             character.classList.add('active-init');
         }
+       
         characterList.appendChild(character);
   
         document.getElementById('characterName').value = '';
         document.getElementById('initiative').value = '';
         
-       
+        sortCharactersByInitiative();
 
         const removeButtons = document.querySelectorAll('.removeButton');
         removeButtons.forEach(button => {
           button.addEventListener('click', function() {
             if(button.parentNode.classList.contains('active-init') && Array.from(characterList.children).length > 1){
                 if(button.parentNode.nextElementSibling === null){
-                
                     button.parentNode.classList.remove('active-init');
                     button.parentNode.previousElementSibling.classList.add('active-init');
                 }
                 else{
                     button.parentNode.classList.remove('active-init');
                     button.parentNode.nextElementSibling.classList.add('active-init');
-                    
                 }
             }
-        
             button.parentNode.remove();
             
           });
-        }); 
-        
+        });   
       }
-
-      sortCharactersByInitiative();
+      
     });
     
 
     nextButton.addEventListener('click', function() {
         const characters = Array.from(characterList.children);
-
         for(let i = 0; i < characters.length; i++){
             
             if(characters[i].classList.contains('active-init')){
@@ -104,9 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
         }
-        
-
     });
+
     function sortCharactersByInitiative() {
       const characters = Array.from(characterList.children);
       characters.sort((a, b) => {
@@ -115,13 +147,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return bInitiative - aInitiative;
       });
     
+      //adds all of the characters back into characterList after sorting them
       characters.forEach(character => characterList.appendChild(character));
       for(let i = 0; i < characters.length; i++){
         if(characters[i].classList.contains('active-init')){
             characters[i].classList.remove('active-init');
         }
       }
+      //Once you add a character set the first one to active
       characters[0].classList.add('active-init');
     }
+
   });
  

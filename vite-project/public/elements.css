@@ -44,7 +44,7 @@ header{
         justify-content: center;
         align-items: center; 
         text-align: center; 
-        padding-top: 1rem;
+        padding-top: .5rem;
     }
     .intro-header{
         font-size:70px;
@@ -54,7 +54,7 @@ header{
         justify-content: center;
         list-style-type: none; 
         padding: 0;
-        margin-top: 3rem;
+        margin-top: 1rem;
     }
 
     .image_off, #home:hover .image_on{
@@ -64,11 +64,11 @@ header{
         display:block
      }
     .door-img{
-        padding-left: 5rem;
-        padding-right: 5rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
      
-        height: 250px;
-        width: 350px;
+        height: 220px;
+        width: 270px;
     }
     
     .doors p{
@@ -97,6 +97,7 @@ header{
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         color: var(--clr-400);
         font-weight: 600;
+        margin-bottom: 10px;
       }
       .card-title {
         font-size: 3rem;
@@ -166,7 +167,7 @@ header{
       }
       
       .tracker {
-        border: 1px solid #ccc;
+        border: 3px solid #ccc;
         border-radius: 5px;
         padding: 20px;
       }
@@ -187,12 +188,20 @@ header{
         background-color: var(--clr-light);
         border-radius: 5px;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
+        word-wrap: break-word;
+        word-break: break-all;
+    
       }
       .character-info {
         color: var(--clr-med-accent);
         font-weight: 600;
+      
+        width: 300px;
+        word-wrap: break-word;
+        word-break: break-all;
+        text-align: center;
       }
       
       .character button {
@@ -202,11 +211,16 @@ header{
         padding: 5px 10px;
         border-radius: 3px;
         cursor: pointer;
+        word-wrap: break-word;
+        word-break: break-all;
       }
 
       .initiative{
         color: var(--clr-med-accent);
         font-weight: 600;
+        width: 300px;
+        word-wrap: break-word;
+        word-break: break-all;
       }
      
       .nextButton{
